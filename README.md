@@ -1,3 +1,11 @@
+
+Bu uygulamanın geliştirme aşaması devam ediyor.
+Bu nedenle derleme hataları ile karşılaşılabilir.
+
+
+
+
+
 go mod init github.com/okaraahmetoglu/go-clean-architecture
 
 Bu komut, projenizin kök dizininde bir go.mod dosyası oluşturur ve 
