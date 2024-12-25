@@ -1,5 +1,15 @@
+<<<<<<< HEAD
 Projenin Geliştirmesi devam ediyor.
 Hatalar ile karşılaşılabilir.
+=======
+
+Bu uygulamanın geliştirme aşaması devam ediyor.
+Bu nedenle derleme hataları ile karşılaşılabilir.
+
+
+
+
+>>>>>>> 1074305af8cfd754f4f867ff15c1a076ef66d8dd
 
 go mod init github.com/okaraahmetoglu/go-clean-architecture
 
