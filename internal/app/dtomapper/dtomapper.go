@@ -1,4 +1,4 @@
-package dto
+package dtomapper
 
 import (
 	"github.com/mitchellh/mapstructure"

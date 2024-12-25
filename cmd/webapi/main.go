@@ -4,25 +4,48 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/mux"
-	"github.com/okaraahmetoglu/go-clean-architecture/internal/interface/controller"
-	"github.com/swaggo/http-swagger" // Swagger dokümantasyonu için
+	"github.com/gin-gonic/gin"
+	"github.com/okaraahmetoglu/go-clean-architecture/internal/infrastructure/config"
+	"github.com/okaraahmetoglu/go-clean-architecture/internal/infrastructure/container"
+	"github.com/okaraahmetoglu/go-clean-architecture/internal/infrastructure/mediator"
+	"github.com/okaraahmetoglu/go-clean-architecture/internal/infrastructure/server"
 )
 
-// @title Go Clean Architecture API
-// @version 1.0
-// @description This is a sample server for demonstrating Clean Architecture with Go.
-// @host localhost:8080
-// @BasePath /
 func main() {
-	r := mux.NewRouter()
 
-	// API endpoint'leri burada eklenecek
-	r.HandleFunc("/users", controller.GetUsers).Methods("GET")
-	r.HandleFunc("/users/{id}", controller.GetUserByID).Methods("GET")
+	// Config yükleme
+	cfg, err := config.Load()
+	if err != nil {
+		log.Fatalf("Config yüklenirken hata oluştu: %v", err)
+	}
 
-	log.Println("Server started on http://localhost:8080")
-	if err := http.ListenAndServe(":8080", r); err != nil {
-		log.Fatal(err)
+	container, err := container.BuildContainer()
+
+	// Tüm bağımlılıkları kaydetme
+	if err != nil {
+		log.Fatalf("Bağımlılıklar kaydedilirken hata oluştu: %v", err)
+	}
+
+	// Mediator oluştur
+	m := mediator.NewMediator()
+
+	// Handler'ları otomatik register et
+	if err := m.AutoRegisterHandlers("./internal/app/"); err != nil {
+		log.Fatalf("Failed to auto-register handlers: %v", err)
+	}
+
+	// Router ve Logger ile sunucu başlatma
+	err = container.Invoke(func(router *gin.Engine) {
+		// Sunucu oluşturma
+		srv := server.NewHTTPServer(cfg.Server.Port, router)
+
+		log.Printf("Uygulama başlatılıyor: %d", cfg.Server.Port)
+		if err := srv.Start(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("Sunucu başlatılamadı: %v", err)
+		}
+	})
+
+	if err != nil {
+		log.Fatalf("Container invoke sırasında hata oluştu: %v", err)
 	}
 }

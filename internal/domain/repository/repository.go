@@ -2,7 +2,7 @@ package repository
 
 // Artırılabilir türler için bir tür kısıtlaması tanımlıyoruz
 type Incrementable interface {
-	int | int64
+	int | int32 | int64 | uint | uint32 | uint64
 }
 
 // GenericRepository generic bir repository arayüzü

@@ -1,11 +1,14 @@
 package entity
 
+import "gorm.io/gorm"
+
 // User, bir kullanıcıyı temsil eder
 type User struct {
-	ID    int    `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email"`
-	Age   int    `json:"age"`
+	gorm.Model
+	ID    int
+	Name  string
+	Email string
+	Age   int
 }
 
 // GetID, User entity'sinin ID'sini döner
