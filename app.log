@@ -1,0 +1,45 @@
+2025/02/26 18:14:17 Logger başlatıldı.
+2025/02/26 18:14:17 [INFO]: BuildContainer başladı...
+2025/02/26 18:14:17 [INFO]: RegisterDependencies başladı
+2025/02/26 18:14:17 [INFO]: gin.Engine provided
+2025/02/26 18:14:17 [INFO]: config.Config provided
+2025/02/26 18:14:17 [INFO]: gorm.DB provided
+2025/02/26 18:14:17 [INFO]: UserRepository provided
+2025/02/26 18:14:17 [INFO]: All provided
+2025/02/26 18:14:17 [INFO]: testRegister called
+2025/02/26 18:14:17 [INFO]: InitGorm Başlatıldı....
+2025/02/26 18:14:17 [INFO]: Log check before gorm initialization
+2025/02/26 18:14:17 [FATAL]: Database-Url : host=localhost user=postgres password=Ok123456* dbname=cleanarch port=5432 sslmode=disable
+2025/02/26 18:14:17 [FATAL]: Failed to connect to database: failed to connect to `user=postgres database=cleanarch`:
+	127.0.0.1:5432 (localhost): dial error: dial tcp 127.0.0.1:5432: connectex: No connection could be made because the target machine actively refused it.
+	[::1]:5432 (localhost): dial error: dial tcp [::1]:5432: connectex: No connection could be made because the target machine actively refused it.
+2025/02/26 18:14:17 [INFO]: AutoMigrate Başladı....
+2025/02/26 18:14:17 [FATAL]: Migration sırasında hata: failed to connect to `user=postgres database=cleanarch`:
+	127.0.0.1:5432 (localhost): dial error: dial tcp 127.0.0.1:5432: connectex: No connection could be made because the target machine actively refused it.
+	[::1]:5432 (localhost): dial error: dial tcp [::1]:5432: connectex: No connection could be made because the target machine actively refused it.
+2025/02/26 18:14:17 [INFO]: AutoMigrate Tamamlandı....
+2025/02/26 18:14:17 [INFO]: Connected to the database successfully!
+2025/02/26 18:14:17 [FATAL]: CreateUserHandler &{0xc000048d70 0xc00010c088}
+2025/02/26 18:14:17 [INFO]: CreateUserHandler called:
+2025/02/26 18:14:17 [FATAL]: createUserRequest : Osman
+2025/02/26 18:14:17 [FATAL]: User 0 Osman not created! Hata: failed to connect to `user=postgres database=cleanarch`:
+	127.0.0.1:5432 (localhost): dial error: dial tcp 127.0.0.1:5432: connectex: No connection could be made because the target machine actively refused it.
+	[::1]:5432 (localhost): dial error: dial tcp [::1]:5432: connectex: No connection could be made because the target machine actively refused it.
+2025/02/26 18:14:17 [FATAL]: Hata : User 0 Osman not created! Hata: failed to connect to `user=postgres database=cleanarch`:
+	127.0.0.1:5432 (localhost): dial error: dial tcp 127.0.0.1:5432: connectex: No connection could be made because the target machine actively refused it.
+	[::1]:5432 (localhost): dial error: dial tcp [::1]:5432: connectex: No connection could be made because the target machine actively refused it.
+2025/02/26 18:14:17 [FATAL]: Failed to invoke CreateUserHandler: User 0 Osman not created! Hata: failed to connect to `user=postgres database=cleanarch`:
+	127.0.0.1:5432 (localhost): dial error: dial tcp 127.0.0.1:5432: connectex: No connection could be made because the target machine actively refused it.
+	[::1]:5432 (localhost): dial error: dial tcp [::1]:5432: connectex: No connection could be made because the target machine actively refused it.
+2025/02/26 18:14:17 [INFO]: DeleteUserHandler calling
+2025/02/26 18:14:17 [INFO]: DeleteUserHandler called but error not checked.
+2025/02/26 18:14:17 [FATAL]: DeleteUserRequest Error: failed to connect to `user=postgres database=cleanarch`:
+	127.0.0.1:5432 (localhost): dial error: dial tcp 127.0.0.1:5432: connectex: No connection could be made because the target machine actively refused it.
+	[::1]:5432 (localhost): dial error: dial tcp [::1]:5432: connectex: No connection could be made because the target machine actively refused it.
+2025/02/26 18:14:17 [INFO]: DeleteUserHandler called
+2025/02/26 18:14:17 [FATAL]: GetAllUsersRequest Error: failed to connect to `user=postgres database=cleanarch`:
+	127.0.0.1:5432 (localhost): dial error: dial tcp 127.0.0.1:5432: connectex: No connection could be made because the target machine actively refused it.
+	[::1]:5432 (localhost): dial error: dial tcp [::1]:5432: connectex: No connection could be made because the target machine actively refused it.
+2025/02/26 18:14:17 [INFO]: Bitti...
+2025/02/26 18:14:17 Uygulama başlatılıyor: 8080
+2025/02/26 18:14:17 Sunucu başlatılıyor... Port: :8080

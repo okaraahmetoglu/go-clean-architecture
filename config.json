@@ -7,6 +7,7 @@
     },
     "log":{
         "level" : 1
-    }
+    },
+    "useInMemoryRepository": false    
 }
   

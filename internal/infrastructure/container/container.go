@@ -1,16 +1,15 @@
 package container
 
 import (
-	"log"
-
+	"github.com/okaraahmetoglu/go-clean-architecture/internal/infrastructure/logger"
 	"go.uber.org/dig"
 )
 
-func BuildContainer() (*dig.Container, error) {
+func BuildContainer(logger *logger.Logger) (*dig.Container, error) {
 	container := dig.New()
 
-	if err := RegisterDependencies(container); err != nil {
-		log.Fatalf("Failed to register dependencies: %v", err)
+	if err := RegisterDependencies(container, logger); err != nil {
+		logger.Fatalf("Failed to register dependencies: %v", err)
 		return container, nil
 	}
 

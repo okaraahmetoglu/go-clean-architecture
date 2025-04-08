@@ -19,9 +19,10 @@ type LogConfig struct {
 }
 
 type Config struct {
-	Server   ServerConfig   `json:"server"`
-	Database DatabaseConfig `json:"database"`
-	Log      LogConfig      `json:"log"`
+	Server                ServerConfig   `json:"server"`
+	Database              DatabaseConfig `json:"database"`
+	Log                   LogConfig      `json:"log"`
+	UseInMemoryRepository bool           `json:"useInMemoryRepository"`
 }
 
 func Load() (*Config, error) {

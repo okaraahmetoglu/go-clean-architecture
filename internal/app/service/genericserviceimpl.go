@@ -6,14 +6,14 @@ import (
 )
 
 // GenericUseCaseImpl is a concrete implementation of the GenericUseCase for any entity
-type GenericServiceImpl[T any, D any, ID comparable] struct {
+type GenericServiceImpl[T any, D any, ID repository.Incrementable] struct {
 	// Repository to handle entity persistence (database, in-memory, etc.)
 	// repository Repository[T, ID]
 	repository repository.GenericRepository[T, ID]
 }
 
 // NewGenericUseCase creates a new instance of GenericUseCaseImpl with a repository
-func NewGenericService[T any, D any, ID comparable](repo repository.GenericRepository[T, ID]) *GenericServiceImpl[T, D, ID] {
+func NewGenericService[T any, D any, ID repository.Incrementable](repo repository.GenericRepository[T, ID]) *GenericServiceImpl[T, D, ID] {
 	return &GenericServiceImpl[T, D, ID]{repository: repo}
 }
 

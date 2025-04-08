@@ -1,0 +1,98 @@
+definitions:
+  dto.Response:
+    properties:
+      data:
+        description: Optional, for additional data
+      message:
+        type: string
+    type: object
+  dto.UserDTO:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /users/create:
+    post:
+      consumes:
+      - application/json
+      description: Handles the creation of a new user
+      parameters:
+      - description: User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response'
+      summary: Create a new user
+      tags:
+      - Users
+  /users/getall:
+    get:
+      description: Retrieves a list of all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response'
+      summary: Get all users
+      tags:
+      - Users
+  /users/update:
+    post:
+      consumes:
+      - application/json
+      description: Updates the information of an existing user
+      parameters:
+      - description: Updated User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.Response'
+      summary: Update an existing user
+      tags:
+      - Users
+swagger: "2.0"

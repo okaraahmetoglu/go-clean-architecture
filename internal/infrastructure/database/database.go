@@ -1,36 +1,52 @@
 package database
 
 import (
-	"fmt"
-	"log"
-	"os"
 	"time"
 
+	"github.com/okaraahmetoglu/go-clean-architecture/internal/domain/entity"
+	"github.com/okaraahmetoglu/go-clean-architecture/internal/infrastructure/config"
+	"github.com/okaraahmetoglu/go-clean-architecture/internal/infrastructure/logger"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
+	gormLogger "gorm.io/gorm/logger"
 )
 
 // InitGorm, Gorm ile PostgreSQL bağlantısını başlatır
-func InitGorm() *gorm.DB {
+func InitGorm(config *config.Config) *gorm.DB {
+	appGormLogger, err := logger.NewLogger()
+
+	appGormLogger.Println("InitGorm Başlatıldı....")
+
+	appGormLogger.Println("Log check before gorm initialization")
+
 	// DATABASE_URL'i çevreden alıyoruz
-	dsn := os.Getenv("DATABASE_URL")
+	dsn := config.Database.URL //os.Getenv("DATABASE_URL")
+	appGormLogger.Printf("Database-Url : %s", dsn)
 	if dsn == "" {
-		log.Fatal("DATABASE_URL environment variable not set")
+		appGormLogger.Fatalf("DATABASE_URL environment variable not set")
 	}
 
 	// Gorm'u başlat
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info), // Log seviyesini ayarla
+		Logger: gormLogger.Default.LogMode(gormLogger.Info),
 	})
 	if err != nil {
-		log.Fatalf("Failed to connect to database: %v", err)
+		appGormLogger.Fatalf("Failed to connect to database: %v", err)
 	}
+
+	appGormLogger.Println("AutoMigrate Başladı....")
+	// models.AllModels içindeki tüm modelleri migrate et
+	err = db.AutoMigrate(entity.AllEntities...)
+	if err != nil {
+		appGormLogger.Fatalf("Migration sırasında hata: %v", err)
+	}
+
+	appGormLogger.Println("AutoMigrate Tamamlandı....")
 
 	// Veritabanı bağlantısını test et
 	sqlDB, err := db.DB()
 	if err != nil {
-		log.Fatalf("Failed to get database handle: %v", err)
+		appGormLogger.Fatalf("Failed to get database handle: %v", err)
 	}
 
 	// Veritabanı bağlantısı ayarları
@@ -38,6 +54,6 @@ func InitGorm() *gorm.DB {
 	sqlDB.SetMaxIdleConns(5)                   // Maksimum boşta bekleyen bağlantı sayısı
 	sqlDB.SetConnMaxLifetime(30 * time.Minute) // Bağlantı maksimum ömrü
 
-	fmt.Println("Connected to the database successfully!")
+	appGormLogger.Println("Connected to the database successfully!")
 	return db
 }

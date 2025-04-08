@@ -4,3 +4,7 @@ package entity
 type Entity[ID comparable] interface {
 	GetID() ID
 }
+
+var AllEntities = []interface{}{
+	&User{},
+}

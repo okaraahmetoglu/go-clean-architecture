@@ -6,7 +6,7 @@ type Incrementable interface {
 }
 
 // GenericRepository generic bir repository arayüzü
-type GenericRepository[T any, ID comparable] interface {
+type GenericRepository[T any, ID Incrementable] interface {
 	GetAll() ([]T, error)
 	GetByID(id ID) (T, error)
 	Create(entity T) (ID, error)
